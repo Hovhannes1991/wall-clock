@@ -1,3 +1,5 @@
+export type Timeout = ReturnType<typeof setTimeout>;
+
 export type ClockType = "arabic" | "roman";
 
 type TimeItemsPosition = {

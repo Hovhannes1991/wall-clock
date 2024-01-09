@@ -26,11 +26,18 @@ const getHandsPositions = (): ClockHandPositions => {
   };
 };
 
-export default function useClockHandsPositions(): ClockHandPositions {
-  let positions = reactive<ClockHandPositions>(getHandsPositions());
+export default function useHandsPositions(): {
+  positions: ClockHandPositions;
+  updatePositions: () => void;
+} {
+  const positions = reactive(getHandsPositions());
 
-  const current_positions = getHandsPositions();
-  positions = reactive(current_positions);
+  const updatePositions = () => {
+    const current_positions = getHandsPositions();
+    positions.hour = current_positions.hour;
+    positions.minute = current_positions.minute;
+    positions.second = current_positions.second;
+  };
 
-  return positions;
+  return { positions, updatePositions };
 }

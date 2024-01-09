@@ -1,17 +1,17 @@
 <template>
   <div class="wall-clock-hands">
     <div class="hour-container">
-      <div class="hour" id="hour" :style="{ transform: hour_pos }">
+      <div class="hour" id="hour" :style="{ transform: positions.hour }">
         <div class="hour-line"></div>
       </div>
     </div>
     <div class="minute-container">
-      <div class="minute" id="minute" :style="{ transform: minute_pos }">
+      <div class="minute" id="minute" :style="{ transform: positions.minute }">
         <div class="minute-line"></div>
       </div>
     </div>
     <div class="second-container">
-      <div class="second" id="second" :style="{ transform: second_pos }">
+      <div class="second" id="second" :style="{ transform: positions.second }">
         <div class="second-line"></div>
       </div>
     </div>
@@ -19,24 +19,15 @@
 </template>
 
 <script setup lang="ts">
+import { Timeout } from "@/types/types";
 import { ref } from "vue";
-import useClockHandsPositions from "@/composables/useClockHandsPositions";
+import useHandsPositions from "@/composables/handsPositions";
 
-const hour_pos = ref("");
-const minute_pos = ref("");
-const second_pos = ref("");
-const intervalId = ref<number | null>(null);
+const intervalId = ref<Timeout | null>(null);
 
-const updateHandsPositions = () => {
-  const positions = useClockHandsPositions();
-  hour_pos.value = positions.hour;
-  minute_pos.value = positions.minute;
-  second_pos.value = positions.second;
-};
+const { positions, updatePositions } = useHandsPositions();
 
-updateHandsPositions();
-
-intervalId.value = setInterval(updateHandsPositions, 1000);
+intervalId.value = setInterval(updatePositions, 1000);
 </script>
 
 <style lang="scss" scoped>
@@ -121,3 +112,4 @@ intervalId.value = setInterval(updateHandsPositions, 1000);
   }
 }
 </style>
+@/composables/handsPositions
