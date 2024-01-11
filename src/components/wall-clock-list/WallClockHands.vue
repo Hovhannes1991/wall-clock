@@ -23,9 +23,11 @@ import { Timeout } from "@/types/types";
 import { ref } from "vue";
 import useHandsPositions from "@/composables/handsPositions";
 
+const props = defineProps(["timeOffset"]);
+
 const intervalId = ref<Timeout | null>(null);
 
-const { positions, updatePositions } = useHandsPositions();
+const { positions, updatePositions } = useHandsPositions(props.timeOffset);
 
 intervalId.value = setInterval(updatePositions, 1000);
 </script>

@@ -16,6 +16,12 @@
   }
 }
 
+@media (max-width: 370px) {
+  :root {
+    --clock-size: 20rem;
+  }
+}
+
 *,
 *::before,
 *::after {
@@ -42,4 +48,16 @@ html {
   gap: 10rem;
   overflow: hidden;
   padding: 5rem;
+}
+
+.app_flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app_text-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

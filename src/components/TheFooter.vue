@@ -1,13 +1,13 @@
 <template>
-  <header class="app-header">
-    <h1>Wall Clocks</h1>
-  </header>
+  <footer class="app-footer">
+    <h1>Wall Clocks Footer</h1>
+  </footer>
 </template>
 
 <script setup lang="ts"></script>
 
 <style lang="scss" scoped>
-.app-header {
+.app-footer {
   display: none;
 }
 </style>

@@ -9,10 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "luxon": "^3.4.4",
     "pinia": "^2.1.7",
     "vue": "^3.3.11"
   },
   "devDependencies": {
+    "@types/luxon": "^3.4.0",
     "@types/node": "^20.10.6",
     "@vitejs/plugin-vue": "^4.5.2",
     "sass": "^1.69.7",

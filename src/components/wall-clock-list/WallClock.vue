@@ -1,6 +1,6 @@
 <template>
   <div class="wall-clock">
-    <WallClockHands />
+    <WallClockHands :time-offset="props.timeOffset" />
     <div
       v-for="(time_item, index) in time_items"
       class="number"
@@ -22,12 +22,14 @@
 </template>
 
 <script setup lang="ts">
-import { useClockTypeStore } from "@/store/clock-type";
-const clock_type_store = useClockTypeStore();
-
 import { computed } from "vue";
 import { TimeItemsPositions, LinesPositionsClasses } from "@/types/types.ts";
 import WallClockHands from "./WallClockHands.vue";
+
+const props = defineProps(["timeOffset"]);
+
+import { useClockTypeStore } from "@/store/clock-type";
+const clock_type_store = useClockTypeStore();
 
 const lines_count = 5 * 12;
 
@@ -35,7 +37,7 @@ const arabic = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 const roman = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "Ⅶ", "Ⅷ", "Ⅸ", "Ⅹ", "Ⅺ", "Ⅻ"];
 
-const type = clock_type_store.getClockType;
+const type = computed(() => clock_type_store.clock_type);
 
 const time_items = computed(() => {
   return type.value === "arabic" ? arabic : roman;
@@ -87,6 +89,10 @@ const linesPositionsClasses = computed<LinesPositionsClasses>(() => {
     @media (max-width: 450px) {
       font-size: 1.8rem;
     }
+
+    @media (max-width: 370px) {
+      font-size: 1.4rem;
+    }
   }
 
   .line {
@@ -104,6 +110,14 @@ const linesPositionsClasses = computed<LinesPositionsClasses>(() => {
     &.big-line {
       font-size: 1.3rem;
       font-weight: 700;
+    }
+
+    @media (max-width: 370px) {
+      font-size: 0.5rem;
+      &.big-line {
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
     }
   }
 }
